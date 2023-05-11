@@ -24,3 +24,17 @@ app.get("/things/:idThing", (req, res) => {
   );
   res.status(200).json({ thingiKnow });
 });
+
+app.delete("/things/:idThing", (req, res) => {
+  const thingiKnowIndex = thingsiKnow.findIndex(
+    (thing) => thing.id === req.params.idThing
+  );
+
+  if (thingiKnowIndex === -1) {
+    res.status(404).json({ message: "Not found" });
+    return;
+  }
+
+  thingsiKnow.splice(thingiKnowIndex, 1);
+  res.status(204);
+});
